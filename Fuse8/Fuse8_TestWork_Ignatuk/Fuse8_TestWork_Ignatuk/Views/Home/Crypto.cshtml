@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Fuse8_TestWork_Ignatuk.Models.Coin>
+@{
+    ViewBag.Title = "Биткоины, и все все все";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Если ты видишь эту надпись, значит ты авторизован на сайте через куки (cookie)! Поздравляем! (;</p>
+
+<h3>@TempData["Coins"]</h3>
+
+<table class="table">
+    <tr><th>Название крипто</th><th>Символ</th><th>Логотип</th><th>Курс к USD</th><th>Линия роста за 1 час</th>  <th>Линия роста за 24 часа</th> <th>Капитализация в USD</th><th>Время обновления данных</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr><td>@item.name</td><td>@item.symbol</td> <td><img src="@Url.Content(item.logo)" alt="Image" height="30" /></td> <td>@item.price</td> <td>@item.percent_change_1h</td><td>@item.percent_change_24h</td><td>@item.market_cap</td><td>@item.last_updated</td> </tr>
+    }
+</table>
