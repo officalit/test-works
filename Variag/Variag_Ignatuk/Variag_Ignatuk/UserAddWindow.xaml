@@ -1,0 +1,59 @@
+﻿<Window x:Class="Variag_Ignatuk.UserAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variag_Ignatuk"
+        mc:Ignorable="d"
+        Title="Добавление нового пользователя" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+   
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Имя" />
+        <TextBlock Text="Фамилия" Grid.Row="1" />
+        <TextBlock Text="Возраст" Grid.Row="2" />
+
+        <TextBox Name="firstname" Text="{Binding firstname}" Grid.Column="1" />
+        <TextBox Name="lastname" Text="{Binding lastname}" Grid.Column="1" Grid.Row="1" />
+        <TextBox Name="age" Text="{Binding age}" Grid.Column="1" Grid.Row="2"/>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Button Content="ОК" Click="Accept_Click" MinWidth="60" Margin="5" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=firstname, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=lastname, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=age, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button IsCancel="True" MinWidth="60" Margin="5">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

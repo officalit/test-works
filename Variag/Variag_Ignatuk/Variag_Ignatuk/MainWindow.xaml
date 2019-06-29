@@ -1,0 +1,84 @@
+﻿<Window x:Class="Variag_Ignatuk.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variag_Ignatuk"
+        mc:Ignorable="d"
+        Title="Тестовое задание. Игнатюк" MinHeight="450" MinWidth="800">
+    <Window.DataContext>
+        <local:MainViewModel></local:MainViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50">
+            </RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Name="Header" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0">
+                <TextBlock FontSize="20" Text="Поиск по фамилии:" ></TextBlock>
+                <TextBox Text="{Binding FiltrSearch, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="10,0" TextAlignment="Center" FontSize="20"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Margin="5" FontSize ="20" Content="Добавить пользователя +" Command="{Binding OpenForm}"/>
+            </StackPanel>
+        </Grid>
+        
+        
+        <Grid Name="BodyCenter" Grid.Row="1">
+            <ListView ItemsSource="{Binding ViewUsers.View}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="Name">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="50">
+                            <GridViewColumnHeader Command="{Binding SortCommand}" CommandParameter="id" TextElement.FontSize="20">ID</GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock FontSize="30" Text="{Binding id}" TextAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200">
+                            <GridViewColumnHeader Command="{Binding SortCommand}" CommandParameter="firstname" TextElement.FontSize="20">Имя</GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock FontSize="30" Text="{Binding firstname}" TextAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" >
+                            <GridViewColumnHeader Command="{Binding SortCommand}" CommandParameter="lastname" TextElement.FontSize="20">Фамилия</GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="30" Text="{Binding lastname}" TextAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" >
+                            <GridViewColumnHeader Command="{Binding SortCommand}" CommandParameter="age" TextElement.FontSize="20">Возраст</GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock FontSize="30" Text="{Binding age}" TextAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Удалить пользователя" Command="{Binding DeleteUserCommand}" ></MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </Grid>
+        
+        
+
+    </Grid>
+</Window>
